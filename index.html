@@ -73,15 +73,17 @@
     margin-top:8px;
   }
   .avatar-dot{
-    width:52px;height:52px;border-radius:50%;
+    width:52px;height:52px;min-width:52px;flex-shrink:0;border-radius:50%;
     background:rgba(255,255,255,.18);
     border:1.5px solid rgba(255,255,255,.5);
     display:flex;align-items:center;justify-content:center;
     font-weight:650;font-size:16px;
     overflow:hidden;
+    -webkit-mask-image:-webkit-radial-gradient(white,black);
   }
   .avatar-dot img{
-    width:100%;height:100%;object-fit:cover;
+    width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;
+    display:block;
   }
   .hero-author .name{font-weight:600;font-size:15px;}
   .hero-author .role{font-size:13px;opacity:.8;}
@@ -129,10 +131,10 @@
 
   .cards{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:16px;
   }
-  @media(max-width:640px){ .cards{grid-template-columns:1fr;} }
+  @media(max-width:640px){ .cards{grid-template-columns:minmax(0,1fr);} }
 
   .card{
     background:var(--card);
@@ -140,6 +142,7 @@
     border-radius:var(--radius);
     padding:24px 24px 22px;
     transition:box-shadow .18s ease, transform .18s ease;
+    min-width:0;
   }
   .card:hover{
     box-shadow:0 12px 28px rgba(63,91,80,.10);
@@ -147,31 +150,34 @@
   }
   .card .top{
     display:flex;
+    flex-wrap:wrap;
     justify-content:space-between;
     align-items:flex-start;
-    gap:12px;
+    gap:8px 12px;
     margin-bottom:10px;
+    min-width:0;
+    width:100%;
   }
   .card h3{
     font-size:17px;
     margin:0;
     font-weight:650;
     line-height:1.35;
+    min-width:0;
   }
   .price{
     flex-shrink:0;
     font-weight:700;
-    font-size:15px;
+    font-size:14.5px;
     color:var(--accent-dark);
     background:var(--accent-soft);
     padding:5px 12px;
     border-radius:100px;
-    white-space:nowrap;
+    white-space:normal;
     max-width:100%;
   }
   @media(max-width:480px){
-    .card .top{flex-direction:column;align-items:flex-start;}
-    .price{white-space:normal;font-size:13.5px;}
+    .price{font-size:13.5px;}
   }
   .card p{
     margin:0;
